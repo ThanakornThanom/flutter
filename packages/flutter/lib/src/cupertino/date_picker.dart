@@ -260,19 +260,20 @@ class CupertinoDatePicker extends StatefulWidget {
   /// positive integer factor of 60.
   ///
   /// [use24hFormat] decides whether 24 hour format is used. Defaults to false.
-  CupertinoDatePicker({
-    Key? key,
-    this.mode = CupertinoDatePickerMode.dateAndTime,
-    required this.onDateTimeChanged,
-    DateTime? initialDateTime,
-    this.minimumDate,
-    this.maximumDate,
-    this.minimumYear = 1,
-    this.maximumYear,
-    this.minuteInterval = 1,
-    this.use24hFormat = false,
-    this.backgroundColor,
-  })  : initialDateTime = initialDateTime ?? DateTime.now(),
+  CupertinoDatePicker(
+      {Key? key,
+      this.mode = CupertinoDatePickerMode.dateAndTime,
+      required this.onDateTimeChanged,
+      DateTime? initialDateTime,
+      this.minimumDate,
+      this.maximumDate,
+      this.minimumYear = 1,
+      this.maximumYear,
+      this.minuteInterval = 1,
+      this.use24hFormat = false,
+      this.backgroundColor,
+      this.languageIndex})
+      : initialDateTime = initialDateTime ?? DateTime.now(),
         assert(mode != null),
         assert(onDateTimeChanged != null),
         assert(minimumYear != null),
@@ -392,7 +393,7 @@ class CupertinoDatePicker extends StatefulWidget {
   ///
   /// Defaults to null, which disables background painting entirely.
   final Color? backgroundColor;
-
+  final int? languageIndex;
   @override
   State<StatefulWidget> createState() {
     // ignore: no_logic_in_create_state, https://github.com/flutter/flutter/issues/70499
@@ -1289,7 +1290,8 @@ class _CupertinoDatePickerDateState extends State<CupertinoDatePicker> {
               children: [
                 Expanded(
                   child: Text(
-                    localizations.datePickerMonth(month),
+                    localizations.datePickerMonth(month,
+                        indexLanguage: widget.languageIndex),
                     textAlign: TextAlign.center,
                     style: _themeTextStyle(context, isValid: !isInvalidMonth),
                   ),
